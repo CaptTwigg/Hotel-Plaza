@@ -37,10 +37,12 @@ public static void interFace(){
   default:
     System.out.println("Not valid");
   }
+  scanner.close();
 }
 public static void staffOption(){
   Scanner scanner = new Scanner(System.in);
   System.out.println("");
+  scanner.close();
 }
 
 public static int readInt() {
@@ -52,6 +54,7 @@ public static int readInt() {
     System.out.println("Not a number!");
     num = readInt();
   }
+
   return num;
 }
 }
