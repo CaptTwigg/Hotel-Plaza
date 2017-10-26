@@ -1,13 +1,22 @@
 import java.util.*;
 
 public class HotelExercise {
-public static void main(String[] args){
+public static void main(String[] args) throws Exception {
   ArrayList<Room> rooms = new ArrayList<>();
+  ArrayList<Guest> guests = new ArrayList<>();
+
   rooms.add(new Room(1, 1, true, 1, 1));
 
-  System.out.println(rooms.get(0).toString());
-  rooms.get(0).changePrice(200);
-  System.out.println(rooms.get(0).toString());
+  for (int i = 0; i < 10; i++) {
+    guests.add(new Guest("bob", "bobsen", "kbh", 12345678));
+  }
+  for (int i = 0; i < 10; i++) {
+    System.out.println(guests.get(i).toString());
+  }
+  for (int i = 0; i < 10; i++) {
+    guests.get(i).saveToFile("guests.dat");
+  }
+
   // interFace();
 }
 public static void interFace(){
@@ -28,6 +37,10 @@ public static void interFace(){
   default:
     System.out.println("Not valid");
   }
+}
+public static void staffOption(){
+  Scanner scanner = new Scanner(System.in);
+  System.out.println("");
 }
 
 public static int readInt() {
