@@ -2,9 +2,13 @@ import java.util.*;
 
 public class HotelExercise {
 public static void main(String[] args){
-  Room room = new Room(1, 1, true, 1, 1);
-  System.out.println(room.toString());
-  interFace();
+  ArrayList<Room> rooms = new ArrayList<>();
+  rooms.add(new Room(1, 1, true, 1, 1));
+
+  System.out.println(rooms.get(0).toString());
+  rooms.get(0).changePrice(200);
+  System.out.println(rooms.get(0).toString());
+  // interFace();
 }
 public static void interFace(){
   System.out.println("1: Add guest, 2: Checkout guest, 3: staff options");
@@ -25,6 +29,7 @@ public static void interFace(){
     System.out.println("Not valid");
   }
 }
+
 public static int readInt() {
   int num = 0;
   try {
