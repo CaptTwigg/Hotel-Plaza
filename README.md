@@ -22,7 +22,7 @@ Add associations between the classes
 
 Make the classes in JGrasp ( **based upon your class diagram** )
 
-Make the fields in class _Room_, G_uest_ and _Staff_ private and ad getters and setters.
+Make the fields in class _Room_, _Guest_ and _Staff_ private and ad getters and setters.
 
 If necessary, change the methods you have made in your classes, to handle the encapsulation.
 
