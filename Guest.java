@@ -1,22 +1,31 @@
 import java.io.*;
 
 public class Guest {
-private static int guestID;
+private int guestID;
 private String firstName;
 private String lastName;
 private String address;
 private int phoneNumber;
+private int roomID;
 
-public Guest(String firstName, String lastName, String address, int phoneNumber){
+public Guest(int guestID, String firstName, String lastName, String address, int phoneNumber){
+  this.guestID = guestID;
   this.firstName = firstName;
   this.lastName = lastName;
   this.address = address;
   this.phoneNumber = phoneNumber;
-  guestID++;
 }
 
 public int getID(){
   return guestID;
+}
+
+public void setRoom(int roomID){
+  this.roomID = roomID;
+}
+
+public void changePhoneNumber(int phoneNumber){
+  this.phoneNumber = phoneNumber;
 }
 
 public void saveToFile(String file) throws Exception {
