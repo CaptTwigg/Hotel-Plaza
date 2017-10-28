@@ -3,27 +3,25 @@ import java.io.*;
 
 public class HotelExercise {
 public static void main(String[] args) throws Exception {
-  ArrayList<Room> rooms = new ArrayList<>();
   ArrayList<Guest> guests = new ArrayList<>();
 
-  loadGuestFile("guests.dat", guests);
+  // loadGuestFile("guests.dat", guests);
 
-  // generateGuests(5, guests);
+  generateGuests(5, guests);
   // addGuest(guests);
-  // saveGuestsToFile("guests.dat", guests);
-  for (int i = 0; i < guests.size(); i++) {
-    System.out.println(guests.get(i).toString());
-  }
+
+  saveGuestsToFile("guests.dat", guests);
+  showGuests(guests);
+  // System.out.print(updateGuestID());
 
 
 
   // interFace();
 }
 
-public static void addGuest(ArrayList<Guest> guests){
+public static void addGuest(ArrayList<Guest> guests) throws Exception {
   // guests = new ArrayList<>();
   Scanner scanner = new Scanner(System.in);
-  // int guestID = 0;
 
   System.out.print("Enter first name: ");
   String firstName = scanner.next();
@@ -31,16 +29,41 @@ public static void addGuest(ArrayList<Guest> guests){
   String lastName = scanner.next();
   System.out.print("Enter address: ");
   String address = scanner.next();
-  System.out.print("Enter phone number: ");
-  int phoneNumber = scanner.nextInt();
+  // System.out.print("Enter phone number: ");
+  int phoneNumber = readInt("Enter phone number");
 
-  guests.add(new Guest(firstName, lastName, address, phoneNumber));
-  // guestID++;
+  guests.add(new Guest(updateGuestID(), firstName, lastName, address, phoneNumber));
+}
+
+public static int updateGuestID() throws Exception {
+  int guestID;
+  final int first = 0;
+  if (first == 0) guestID = getGuestID("guests.dat");
+  else guestID = 0;
+
+
+  // if (firstTime > guestID) guestID = firstTime;
+  guestID++;
+  first++;
+
+  return guestID;
+}
+
+public static int getGuestID(String file) throws Exception {
+  Scanner scanner = new Scanner(new File(file));
+  int guestID = 0;
+  while (scanner.hasNextLine()) {
+    String ID = scanner.nextLine();
+    Scanner lineScan = new Scanner(ID);
+    guestID = lineScan.nextInt();
+  }
+  scanner.close();
+  return guestID;
 }
 
 public static void saveGuestsToFile(String file, ArrayList<Guest> guests) throws Exception {
-  for (int i = 0; i < 10; i++) {
-    guests.get(i).saveFile("guests.dat");
+  for (int i = 0; i < guests.size(); i++) {
+    guests.get(i).saveFile(file);
   }
 }
 
@@ -51,10 +74,16 @@ public static void loadGuestFile(String file, ArrayList<Guest> guests) throws Ex
     String guest = scanner.nextLine();
     Scanner lineScan = new Scanner(guest);
 
-    guests.add(new Guest(lineScan.next(), lineScan.next(), lineScan.next(), lineScan.nextInt()));
+    guests.add(new Guest(lineScan.nextInt(), lineScan.next(), lineScan.next(), lineScan.next(), lineScan.nextInt()));
     lineScan.close();
   }
   scanner.close();
+}
+
+public static void showGuests(ArrayList<Guest> guests){
+  for (int i = 0; i < guests.size(); i++) {
+    System.out.println(guests.get(i).toString());
+  }
 }
 
 
@@ -63,7 +92,7 @@ public static void interFace(){
 
   Scanner scanner = new Scanner(System.in);
 
-  switch (readInt()) {
+  switch (readInt("Enter Number")) {
   case 1:
     System.out.println("add");
     break;
@@ -85,28 +114,29 @@ public static void staffOption(){
   scanner.close();
 }
 
-public static int readInt() {
+public static int readInt(String message) {
   int num = 0;
   try {
-    System.out.print("Enter Number: ");
+    System.out.print(message);
     num = (new Scanner(System.in)).nextInt();
   } catch (InputMismatchException e) {
     System.out.println("Not a number!");
-    num = readInt();
+    num = readInt(message);
   }
 
   return num;
 }
+
 public static String randomName(){
   Random random = new Random();
-  String[] names = { "Jay", "Hae", "Sindy", "Carmon", "Janeth", "Vernon", "Olin", "In" };
+  String[] names = { "Jay", "Hae", "Sindy", "Carmon", "Janeth", "Vernon", "Olin", "Inger", "Lindsey", "Michael", "Benton", "Marcy", "Caleb" };
 
   return names[random.nextInt(names.length)];
 }
 
 public static String randomAddress(){
   Random random = new Random();
-  String[] names = { "København", "Odense", "Aarhus", "Herlev", "Taarnby", "Dragoer", "Roskilde" };
+  String[] names = { "Koebenhavn", "Odense", "Aarhus", "Herlev", "Taarnby", "Dragoer", "Roskilde" };
 
   return names[random.nextInt(names.length)];
 }
@@ -116,9 +146,9 @@ public static int randomNumber(){
   return random.nextInt(89999999) + 10000000;
 }
 
-public static void generateGuests(int numberOfGuests, ArrayList<Guest> guests){
+public static void generateGuests(int numberOfGuests, ArrayList<Guest> guests) throws Exception {
   for (int i = 0; i < numberOfGuests; i++) {
-    guests.add(new Guest(randomName(), randomName(), randomAddress(), randomNumber()));
+    guests.add(new Guest(updateGuestID(), randomName(), randomName(), randomAddress(), randomNumber()));
   }
 }
 }
