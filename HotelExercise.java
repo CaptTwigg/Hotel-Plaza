@@ -21,7 +21,7 @@ public static void main(String[] args) throws Exception {
    Guest related methods:
    addGuest
    updateGuestID
-   getGuestID
+   getGuestIDFromFile
    saveGuestsToFile
    loadGuestFile
    showGuests
@@ -44,13 +44,13 @@ public static void addGuest(ArrayList<Guest> guests) throws Exception {
 }
 
 public static int updateGuestID() throws Exception {
-  int guestID = getGuestID("guests.dat");
+  int guestID = getGuestIDFromFile("guests.dat");
   guestID += 1 + updateGuestIDCounter;
   updateGuestIDCounter++;
   return guestID;
 }
 
-public static int getGuestID(String file) throws Exception {
+public static int getGuestIDFromFile(String file) throws Exception {
   Scanner scanner = new Scanner(new File(file));
   int guestID = 0;
   while (scanner.hasNextLine()) {
