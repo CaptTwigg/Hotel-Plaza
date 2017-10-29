@@ -83,9 +83,10 @@ public static void loadGuestFile(String file, ArrayList<Guest> guests) throws Ex
 }
 
 public static void showGuests(ArrayList<Guest> guests){
-  for (int i = 0; i < guests.size(); i++) {
-    System.out.println(guests.get(i).toString());
-  }
+  // for (int i = 0; i < guests.size(); i++) {
+  //   System.out.println(guests.get(i).toString());
+  // }
+  for (Guest i : guests) System.out.println(i.toString());
 }
 
 /*
