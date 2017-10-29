@@ -16,10 +16,6 @@ public Guest(int guestID, String firstName, String lastName, String address, int
   this.phoneNumber = phoneNumber;
 }
 
-public void changePhoneNumber(int phoneNumber) {
-  this.phoneNumber = phoneNumber;
-}
-
 public void saveFile(String file) throws Exception  {
   FileWriter writer = new FileWriter(new File(file), true);
   String guest = String.format("%d %s %s %s %d ", guestID, firstName, lastName, address, phoneNumber);
