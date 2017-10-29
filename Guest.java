@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.*;
+
 
 public class Guest {
 private int guestID;
@@ -22,6 +24,14 @@ public void saveFile(String file) throws Exception  {
   writer.write(guest + "\n");
   writer.flush();
   writer.close();
+}
+
+public boolean searchGuest(String firstName){
+  return this.firstName.toLowerCase().equals(firstName.toLowerCase());
+}
+
+public boolean searchGuest(int roomID){
+  return this.roomID == roomID;
 }
 
 
