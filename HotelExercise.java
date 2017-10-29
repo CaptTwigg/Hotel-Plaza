@@ -2,22 +2,30 @@ import java.util.*;
 import java.io.*;
 
 public class HotelExercise {
+public static int updateGuestIDCounter = 0;
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
 
-  // loadGuestFile("guests.dat", guests);
+  loadGuestFile("guests.dat", guests);
 
-  generateGuests(5, guests);
+  // generateGuests(5, guests);
   // addGuest(guests);
 
-  saveGuestsToFile("guests.dat", guests);
+  // saveGuestsToFile("guests.dat", guests);
   showGuests(guests);
-  // System.out.print(updateGuestID());
-
-
 
   // interFace();
 }
+
+/*
+   Guest related methods:
+   addGuest
+   updateGuestID
+   getGuestID
+   saveGuestsToFile
+   loadGuestFile
+   showGuests
+ */
 
 public static void addGuest(ArrayList<Guest> guests) throws Exception {
   // guests = new ArrayList<>();
@@ -36,16 +44,9 @@ public static void addGuest(ArrayList<Guest> guests) throws Exception {
 }
 
 public static int updateGuestID() throws Exception {
-  int guestID;
-  final int first = 0;
-  if (first == 0) guestID = getGuestID("guests.dat");
-  else guestID = 0;
-
-
-  // if (firstTime > guestID) guestID = firstTime;
-  guestID++;
-  first++;
-
+  int guestID = getGuestID("guests.dat");
+  guestID += 1 + updateGuestIDCounter;
+  updateGuestIDCounter++;
   return guestID;
 }
 
@@ -56,6 +57,7 @@ public static int getGuestID(String file) throws Exception {
     String ID = scanner.nextLine();
     Scanner lineScan = new Scanner(ID);
     guestID = lineScan.nextInt();
+    lineScan.close();
   }
   scanner.close();
   return guestID;
@@ -86,6 +88,11 @@ public static void showGuests(ArrayList<Guest> guests){
   }
 }
 
+/*
+   Interface related methods:
+   interface
+   staffOption
+ */
 
 public static void interFace(){
   System.out.println("1: Add guest, 2: Checkout guest, 3: staff options");
@@ -114,22 +121,31 @@ public static void staffOption(){
   scanner.close();
 }
 
+// Checks if user input is a number
 public static int readInt(String message) {
   int num = 0;
   try {
     System.out.print(message);
     num = (new Scanner(System.in)).nextInt();
   } catch (InputMismatchException e) {
-    System.out.println("Not a number!");
+    System.out.println("Enter number, please");
     num = readInt(message);
   }
 
   return num;
 }
 
+/*
+   Random guest generator methods:
+   randomName
+   randomAddress
+   randomNumber
+   generateGuests
+ */
+
 public static String randomName(){
   Random random = new Random();
-  String[] names = { "Jay", "Hae", "Sindy", "Carmon", "Janeth", "Vernon", "Olin", "Inger", "Lindsey", "Michael", "Benton", "Marcy", "Caleb" };
+  String[] names = { "Jay", "Hae", "Sindy", "Carmon", "Janeth", "Vernon", "Olin", "Inger", "Lindsey", "Michael", "Benton", "Marcy", "Caleb", "Olsen", "Cay", "Kenneth" };
 
   return names[random.nextInt(names.length)];
 }
