@@ -7,7 +7,7 @@ public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
 
   loadGuestFile("guests.dat", guests);
-
+  System.out.println(guests.get(0).searchGuest("cay"));
   // generateGuests(5, guests);
   // addGuest(guests);
 
@@ -19,6 +19,7 @@ public static void main(String[] args) throws Exception {
 
 /*
    Guest related methods:
+   searchGuest - by name or roomID
    addGuest
    updateGuestID
    getGuestIDFromFile
@@ -26,6 +27,18 @@ public static void main(String[] args) throws Exception {
    loadGuestFile
    showGuests
  */
+
+public static int searchGuest(String name, ArrayList<Guest> guests){
+  for (int index = 0; index < guests.size(); index++) {
+    if (guests.get(index).searchGuest(name)) {
+      return index;
+    }
+  }
+  return -1;
+}
+
+public static void searchGuest(int roomID, ArrayList<Guest> guest){
+}
 
 public static void addGuest(ArrayList<Guest> guests) throws Exception {
   // guests = new ArrayList<>();
