@@ -33,7 +33,13 @@ public boolean searchGuest(String search){
   return false;
 }
 
-public boolean searchGuest(int guestID){
+public boolean searchGuest(int number){
+  if (number == this.guestID) return true;
+  if (number == this.phoneNumber) return true;
+  return false;
+}
+
+public boolean searchGuestID(int guestID){
   return this.guestID == guestID;
 }
 
