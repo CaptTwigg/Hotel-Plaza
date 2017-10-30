@@ -26,8 +26,11 @@ public void saveFile(String file) throws Exception  {
   writer.close();
 }
 
-public boolean searchGuest(String firstName){
-  return this.firstName.toLowerCase().equals(firstName.toLowerCase());
+public boolean searchGuest(String search){
+  if (this.firstName.toLowerCase().equals(search.toLowerCase())) return true;
+  if (this.lastName.toLowerCase().equals(search.toLowerCase())) return true;
+  if (this.address.toLowerCase().equals(search.toLowerCase())) return true;
+  return false;
 }
 
 public boolean searchGuest(int guestID){
