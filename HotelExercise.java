@@ -5,12 +5,10 @@ public class HotelExercise {
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
   loadGuestFile("guests.dat", guests);
-  // System.out.println(guests.get(2).getGuestID());
-  // System.out.println(guests.get(0).searchGuest("cay"));
-  generateGuests(10, guests);
+  generateGuests(2, guests);
   // addGuest(guests);
 
-  // saveGuestsToFile("guests.dat", guests);
+  saveGuestsToFile("guests.dat", guests);
   showGuests(guests);
 
   // interFace();
@@ -21,7 +19,6 @@ public static void main(String[] args) throws Exception {
    searchGuest - by name or roomID
    addGuest
    updateGuestID
-   getGuestIDFromFile
    saveGuestsToFile
    loadGuestFile
    showGuests
@@ -40,7 +37,6 @@ public static void searchGuest(int roomID, ArrayList<Guest> guest){
 }
 
 public static void addGuest(ArrayList<Guest> guests) throws Exception {
-  // guests = new ArrayList<>();
   Scanner scanner = new Scanner(System.in);
 
   System.out.print("Enter first name: ");
@@ -49,32 +45,14 @@ public static void addGuest(ArrayList<Guest> guests) throws Exception {
   String lastName = scanner.next();
   System.out.print("Enter address: ");
   String address = scanner.next();
-  // System.out.print("Enter phone number: ");
   int phoneNumber = readInt("Enter phone number");
 
   guests.add(new Guest(updateGuestID(guests), firstName, lastName, address, phoneNumber));
 }
 
 public static int updateGuestID(ArrayList<Guest> guests) throws Exception {
-  // int guestID = getGuestIDFromFile("guests.dat");
-
-  // guestID += 1 + updateGuestIDCounter;
-  // updateGuestIDCounter++;
   int guestID = guests.get(guests.size() - 1).getGuestID();
   guestID++;
-  return guestID;
-}
-
-public static int getGuestIDFromFile(String file) throws Exception {
-  Scanner scanner = new Scanner(new File(file));
-  int guestID = 0;
-  while (scanner.hasNextLine()) {
-    String ID = scanner.nextLine();
-    Scanner lineScan = new Scanner(ID);
-    guestID = lineScan.nextInt();
-    lineScan.close();
-  }
-  scanner.close();
   return guestID;
 }
 
@@ -98,9 +76,6 @@ public static void loadGuestFile(String file, ArrayList<Guest> guests) throws Ex
 }
 
 public static void showGuests(ArrayList<Guest> guests){
-  // for (int i = 0; i < guests.size(); i++) {
-  //   System.out.println(guests.get(i).toString());
-  // }
   for (Guest i : guests) System.out.println(i.toString());
 }
 
