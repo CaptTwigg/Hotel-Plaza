@@ -5,9 +5,16 @@ public class HotelExercise {
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
   loadGuestFile("guests.dat", guests);
-  // generateGuests(2, guests);
+  generateGuests(5, guests);
   // addGuest(guests);
-  System.out.println(searchGuest("cay", guests).toString());
+  ArrayList<Guest> holder = searchGuest(25, guests);
+  for (int i = 0; i < holder.size(); i++) {
+    System.out.println(i + 1 + " " + holder.get(i).toString());
+  }
+  showGuests(guests);
+  checkOutGuest(6, guests);
+  System.out.println();
+  showGuests(guests);
   // saveGuestsToFile("guests.dat", guests);
   // showGuests(guests);
 
@@ -25,6 +32,15 @@ public static void main(String[] args) throws Exception {
  */
 
 public static void checkOutGuest(int guestID, ArrayList<Guest> guests){
+  boolean removed = true;
+  for (int i = 0; i < guests.size(); i++) {
+    if (guests.get(i).searchGuestID(guestID)) {
+      System.out.printf("Guest %s checked Out. \n", guests.get(i).getFirstName());
+      guests.remove(i);
+      removed = false;
+    }
+  }
+  if (removed) System.out.println("Guest not found");
 }
 
 public static ArrayList<Guest> searchGuest(String name, ArrayList<Guest> guests){
@@ -37,7 +53,17 @@ public static ArrayList<Guest> searchGuest(String name, ArrayList<Guest> guests)
   return searchedArray;
 }
 
-public static int searchGuest(int guestID, ArrayList<Guest> guests){
+public static ArrayList<Guest> searchGuest(int number, ArrayList<Guest> guests){
+  ArrayList<Guest> searchedArray = new ArrayList<>();
+  for (int index = 0; index < guests.size(); index++) {
+    if (guests.get(index).searchGuest(number)) {
+      searchedArray.add(guests.get(index));
+    }
+  }
+  return searchedArray;
+}
+
+public static int searchGuestID(int guestID, ArrayList<Guest> guests){
   for (int index = 0; index < guests.size(); index++) {
     if (guests.get(index).searchGuest(guestID)) {
       return index;
