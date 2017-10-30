@@ -23,7 +23,9 @@ public static void main(String[] args) throws Exception {
 
 /*
    Guest related methods:
-   searchGuest - by name or guestID
+   checkOutGuest
+   searchGuest - by String or int
+   searchGuestID
    addGuest
    updateGuestID
    saveGuestsToFile
