@@ -30,8 +30,8 @@ public boolean searchGuest(String firstName){
   return this.firstName.toLowerCase().equals(firstName.toLowerCase());
 }
 
-public boolean searchGuest(int roomID){
-  return this.roomID == roomID;
+public boolean searchGuest(int guestID){
+  return this.guestID == guestID;
 }
 
 

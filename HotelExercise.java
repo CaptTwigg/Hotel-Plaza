@@ -5,18 +5,18 @@ public class HotelExercise {
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
   loadGuestFile("guests.dat", guests);
-  generateGuests(2, guests);
+  // generateGuests(2, guests);
   // addGuest(guests);
-
-  saveGuestsToFile("guests.dat", guests);
-  showGuests(guests);
+  System.out.println(searchGuest("cay", guests).toString());
+  // saveGuestsToFile("guests.dat", guests);
+  // showGuests(guests);
 
   // interFace();
 }
 
 /*
    Guest related methods:
-   searchGuest - by name or roomID
+   searchGuest - by name or guestID
    addGuest
    updateGuestID
    saveGuestsToFile
@@ -24,16 +24,26 @@ public static void main(String[] args) throws Exception {
    showGuests
  */
 
-public static int searchGuest(String name, ArrayList<Guest> guests){
+public static void checkOutGuest(int guestID, ArrayList<Guest> guests){
+}
+
+public static ArrayList<Guest> searchGuest(String name, ArrayList<Guest> guests){
+  ArrayList<Guest> searchedArray = new ArrayList<>();
   for (int index = 0; index < guests.size(); index++) {
     if (guests.get(index).searchGuest(name)) {
+      searchedArray.add(guests.get(index));
+    }
+  }
+  return searchedArray;
+}
+
+public static int searchGuest(int guestID, ArrayList<Guest> guests){
+  for (int index = 0; index < guests.size(); index++) {
+    if (guests.get(index).searchGuest(guestID)) {
       return index;
     }
   }
   return -1;
-}
-
-public static void searchGuest(int roomID, ArrayList<Guest> guest){
 }
 
 public static void addGuest(ArrayList<Guest> guests) throws Exception {
