@@ -2,13 +2,12 @@ import java.util.*;
 import java.io.*;
 
 public class HotelExercise {
-public static int updateGuestIDCounter = 0;
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
-
   loadGuestFile("guests.dat", guests);
-  System.out.println(guests.get(0).searchGuest("cay"));
-  // generateGuests(5, guests);
+  // System.out.println(guests.get(2).getGuestID());
+  // System.out.println(guests.get(0).searchGuest("cay"));
+  generateGuests(10, guests);
   // addGuest(guests);
 
   // saveGuestsToFile("guests.dat", guests);
@@ -53,13 +52,16 @@ public static void addGuest(ArrayList<Guest> guests) throws Exception {
   // System.out.print("Enter phone number: ");
   int phoneNumber = readInt("Enter phone number");
 
-  guests.add(new Guest(updateGuestID(), firstName, lastName, address, phoneNumber));
+  guests.add(new Guest(updateGuestID(guests), firstName, lastName, address, phoneNumber));
 }
 
-public static int updateGuestID() throws Exception {
-  int guestID = getGuestIDFromFile("guests.dat");
-  guestID += 1 + updateGuestIDCounter;
-  updateGuestIDCounter++;
+public static int updateGuestID(ArrayList<Guest> guests) throws Exception {
+  // int guestID = getGuestIDFromFile("guests.dat");
+
+  // guestID += 1 + updateGuestIDCounter;
+  // updateGuestIDCounter++;
+  int guestID = guests.get(guests.size() - 1).getGuestID();
+  guestID++;
   return guestID;
 }
 
@@ -178,7 +180,7 @@ public static int randomNumber(){
 
 public static void generateGuests(int numberOfGuests, ArrayList<Guest> guests) throws Exception {
   for (int i = 0; i < numberOfGuests; i++) {
-    guests.add(new Guest(updateGuestID(), randomName(), randomName(), randomAddress(), randomNumber()));
+    guests.add(new Guest(updateGuestID(guests), randomName(), randomName(), randomAddress(), randomNumber()));
   }
 }
 }
