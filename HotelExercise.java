@@ -7,15 +7,15 @@ public static void main(String[] args) throws Exception {
   loadGuestFile("guests.dat", guests);
   generateGuests(5, guests);
   // addGuest(guests);
-  ArrayList<Guest> holder = searchGuest(25, guests);
+  ArrayList<Guest> holder = searchGuest(3, guests);
   for (int i = 0; i < holder.size(); i++) {
     System.out.println(i + 1 + " " + holder.get(i).toString());
   }
-  showGuests(guests);
-  checkOutGuest(6, guests);
-  System.out.println();
-  showGuests(guests);
-  // saveGuestsToFile("guests.dat", guests);
+  // showGuests(guests);
+  // checkOutGuest(6, guests);
+  // System.out.println();
+  // showGuests(guests);
+  saveGuestsToFile("guests.dat", guests);
   // showGuests(guests);
 
   // interFace();
@@ -95,6 +95,7 @@ public static int updateGuestID(ArrayList<Guest> guests) throws Exception {
 }
 
 public static void saveGuestsToFile(String file, ArrayList<Guest> guests) throws Exception {
+  new PrintStream(new File(file));
   for (int i = 0; i < guests.size(); i++) {
     guests.get(i).saveFile(file);
   }
