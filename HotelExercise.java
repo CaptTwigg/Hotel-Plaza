@@ -5,20 +5,16 @@ public class HotelExercise {
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
   loadGuestFile("guests.dat", guests);
-  generateGuests(5, guests);
+  // generateGuests(5, guests);
   // addGuest(guests);
-  ArrayList<Guest> holder = searchGuest(3, guests);
-  for (int i = 0; i < holder.size(); i++) {
-    System.out.println(i + 1 + " " + holder.get(i).toString());
-  }
+
   // showGuests(guests);
   // checkOutGuest(6, guests);
   // System.out.println();
   // showGuests(guests);
-  saveGuestsToFile("guests.dat", guests);
+  // saveGuestsToFile("guests.dat", guests);
   // showGuests(guests);
-
-  // interFace();
+  while (true) interFace(guests);
 }
 
 /*
@@ -32,6 +28,22 @@ public static void main(String[] args) throws Exception {
    loadGuestFile
    showGuests
  */
+
+public static void showSearch(String search, ArrayList<Guest> guests){
+  ArrayList<Guest> holder = searchGuest(search, guests);
+  for (int i = 0; i < holder.size(); i++) {
+    System.out.println(i + 1 + ": " + holder.get(i).toString());
+  }
+  if (holder.size() == 0) System.out.println("Guest not found");
+}
+
+public static void showSearch(int search, ArrayList<Guest> guests){
+  ArrayList<Guest> holder = searchGuest(search, guests);
+  for (int i = 0; i < holder.size(); i++) {
+    System.out.println(i + 1 + ": " + holder.get(i).toString());
+  }
+  if (holder.size() == 0) System.out.println("Guest not found");
+}
 
 public static void checkOutGuest(int guestID, ArrayList<Guest> guests){
   boolean removed = true;
@@ -83,7 +95,7 @@ public static void addGuest(ArrayList<Guest> guests) throws Exception {
   String lastName = scanner.next();
   System.out.print("Enter address: ");
   String address = scanner.next();
-  int phoneNumber = readInt("Enter phone number");
+  int phoneNumber = intInput("Enter phone number");
 
   guests.add(new Guest(updateGuestID(guests), firstName, lastName, address, phoneNumber));
 }
@@ -124,14 +136,12 @@ public static void showGuests(ArrayList<Guest> guests){
    staffOption
  */
 
-public static void interFace(){
-  System.out.println("1: Add guest, 2: Checkout guest, 3: staff options");
+public static void interFace(ArrayList<Guest> guests) throws Exception {
+  System.out.println("1: Guest menu, 2: Booking menu, 3: Staff menu, 4: Room menu");
 
-  Scanner scanner = new Scanner(System.in);
-
-  switch (readInt("Enter Number")) {
+  switch (intInput("Enter Menu Number: ")) {
   case 1:
-    System.out.println("add");
+    guestMenu(guests);
     break;
   case 2:
     System.out.println("Checkout");
@@ -142,27 +152,71 @@ public static void interFace(){
   default:
     System.out.println("Not valid");
   }
-  scanner.close();
 }
 
-public static void staffOption(){
+public static void guestMenu(ArrayList<Guest> guests) throws Exception {
+  Scanner scanner = new Scanner(System.in);
+  System.out.println("1: Add guest, 2: Checkout guest, 3: Change guest info, 4: Show guests, 5: Search guest");
+
+  switch (intInput("Enter Menu Number: ")) {
+  case 1:
+    addGuest(guests);
+    break;
+  case 2:
+    checkOutGuest(intInput("Enter guest ID: "), guests);
+    break;
+  case 3:
+    System.out.println("Comming soon");
+    break;
+  case 4:
+    showGuests(guests);
+    break;
+  case 5:
+    System.out.print("Enter guest keyword: ");
+    String search = scanner.next();
+    if (isInteger(search)) {
+      int searchInt = Integer.parseInt(search);
+      showSearch(searchInt, guests);
+    }else showSearch(search, guests);
+    break;
+  default:
+    System.out.println("Not valid");
+  }
+}
+
+
+public static void staffMenu(){
   Scanner scanner = new Scanner(System.in);
   System.out.println("");
   scanner.close();
 }
 
-// Checks if user input is a number
-public static int readInt(String message) {
+/*
+   Helper methods:
+   intInput loops input until number is given
+   isInteger checks if String is a int and return true/false
+ */
+public static int intInput(String message) {
   int num = 0;
   try {
     System.out.print(message);
     num = (new Scanner(System.in)).nextInt();
   } catch (InputMismatchException e) {
     System.out.println("Enter number, please");
-    num = readInt(message);
+    num = intInput(message);
   }
 
   return num;
+}
+
+public static boolean isInteger(String s) {
+  try{
+    Integer.parseInt(s);
+    return true;
+  }
+  catch (NumberFormatException ex) {
+    return false;
+  }
 }
 
 /*
