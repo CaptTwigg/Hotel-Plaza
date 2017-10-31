@@ -4,7 +4,11 @@ import java.io.*;
 public class HotelExercise {
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
+
   loadGuestFile("guests.dat", guests);
+
+  GuestUtil guestUtil = new GuestUtil(guests);
+  guestUtil.showGuests(guests);
   // generateGuests(5, guests);
   // addGuest(guests);
 
@@ -14,7 +18,7 @@ public static void main(String[] args) throws Exception {
   // showGuests(guests);
   // saveGuestsToFile("guests.dat", guests);
   // showGuests(guests);
-  while (true) interFace(guests);
+  // while (true) interFace(guests);
 }
 
 /*
@@ -133,7 +137,8 @@ public static void showGuests(ArrayList<Guest> guests){
 /*
    Interface related methods:
    interface
-   staffOption
+   guestMenu menu for all guest methods
+   staffMenu
  */
 
 public static void interFace(ArrayList<Guest> guests) throws Exception {
@@ -144,10 +149,13 @@ public static void interFace(ArrayList<Guest> guests) throws Exception {
     guestMenu(guests);
     break;
   case 2:
-    System.out.println("Checkout");
+    System.out.println("Comming soon");
     break;
   case 3:
-    System.out.println("staff");
+    System.out.println("Comming soon");
+    break;
+  case 4:
+    System.out.println("Comming soon");
     break;
   default:
     System.out.println("Not valid");
