@@ -14,21 +14,11 @@ public static void main(String[] args) throws Exception {
 
   GuestUtil.loadGuestFile(guestFile, guests);
 
-  // guestUtil.showGuests(guests);
   // generateGuests(30, guests);
-  // addGuest(guests);
 
-  // showGuests(guests);
-  // checkOutGuest(6, guests);
-  // System.out.println();
-  // showGuests(guests);
   // saveGuestsToFile(guestFile, guests);
-  // showGuests(guests);
   while (true) interFace(guests);
 }
-
-
-
 
 /*
    Interface related methods:
@@ -61,7 +51,35 @@ public static void interFace(ArrayList<Guest> guests) throws Exception {
 
 
 public static void bookingMenu(){
-  System.out.println("1: Create booking, 2: Extend stay, 3: Staff menu, 4: Room menu");
+  System.out.println("1: Create booking, 2: Extend stay");
+
+
+  switch (intInput("Enter Menu Number: ")) {
+  case 1:
+    break;
+  case 2:
+    break;
+  }
+}
+
+public static void CreateBooking(ArrayList<Booking> booking, ArrayList<Guest> guests) throws Exception {
+  Scanner scanner = new Scanner(System.in);
+  int getID;
+  System.out.println("1: Add new guest, 2: Add existing guest");
+
+  switch (intInput("Enter Menu Number: ")) {
+  case 1:
+    GuestUtil.addGuest(guests);
+    getID = guests.get(guests.size() - 1).getGuestID();
+    break;
+  case 2:
+    int guestIndex;
+    do {
+      guestIndex = GuestUtil.searchGuestID(intInput("Enter guest iD: "), guests);
+    } while (guestIndex == -1);
+
+    break;
+  }
 }
 
 public static void staffMenu(){
