@@ -2,10 +2,9 @@ import java.util.*;
 import java.io.*;
 
 public class GuestUtil {
-// ArrayList<Guest> guests;
-
 /*
    Guest related methods:
+   guestMenu
    changeGuestInfo
    changeGuestInfoMenu
    showSearch - by String or int
@@ -18,6 +17,38 @@ public class GuestUtil {
    loadGuestFile
    showGuests
  */
+
+public static void guestMenu(ArrayList<Guest> guests) throws Exception {
+  Scanner scanner = new Scanner(System.in);
+  System.out.println("1: Add guest, 2: Checkout guest, 3: Change guest info, 4: Show guests, 5: Search guest, -1: Back to main menu");
+
+  switch (intInput("Enter Menu Number: ")) {
+  case -1:
+    break;
+  case 1:
+    GuestUtil.addGuest(guests);
+    break;
+  case 2:
+    GuestUtil.checkOutGuest(intInput("Enter guest ID: "), guests);
+    break;
+  case 3:
+    GuestUtil.changeGuestInfo(guests);
+    break;
+  case 4:
+    GuestUtil.showGuests(guests);
+    break;
+  case 5:
+    System.out.print("Enter guest keyword: ");
+    String search = scanner.next();
+    if (isInteger(search)) {
+      int searchInt = Integer.parseInt(search);
+      GuestUtil.showSearch(searchInt, guests);
+    } else GuestUtil.showSearch(search, guests);
+    break;
+  default:
+    System.out.println("Not valid");
+  }
+}
 
 public static void changeGuestInfo(ArrayList<Guest> guests){
   int ID;
@@ -170,5 +201,15 @@ public static int intInput(String message) {
   }
 
   return num;
+}
+
+public static boolean isInteger(String s) {
+  try{
+    Integer.parseInt(s);
+    return true;
+  }
+  catch (NumberFormatException ex) {
+    return false;
+  }
 }
 }

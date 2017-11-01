@@ -5,12 +5,17 @@ public class HotelExercise {
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
   String guestFile = "guests.dat";
+  Booking book = new Booking("20/02/2017", "10/02/2017", 22, 22);
+  System.out.println(book.getNumberOfDays());
+  System.out.println(book.getEndDate());
+  book.setEndDate("25/2/2017");
+  System.out.println(book.getEndDate());
+  System.out.println(book.getNumberOfDays());
 
-
-  // GuestUtil.loadGuestFile(guestFile, guests);
+  GuestUtil.loadGuestFile(guestFile, guests);
 
   // guestUtil.showGuests(guests);
-  generateGuests(30, guests);
+  // generateGuests(30, guests);
   // addGuest(guests);
 
   // showGuests(guests);
@@ -37,7 +42,7 @@ public static void interFace(ArrayList<Guest> guests) throws Exception {
 
   switch (intInput("Enter Menu Number: ")) {
   case 1:
-    guestMenu(guests);
+    GuestUtil.guestMenu(guests);
     break;
   case 2:
     System.out.println("Comming soon");
@@ -53,38 +58,11 @@ public static void interFace(ArrayList<Guest> guests) throws Exception {
   }
 }
 
-public static void guestMenu(ArrayList<Guest> guests) throws Exception {
-  Scanner scanner = new Scanner(System.in);
-  System.out.println("1: Add guest, 2: Checkout guest, 3: Change guest info, 4: Show guests, 5: Search guest, -1: Back to main menu");
 
-  switch (intInput("Enter Menu Number: ")) {
-  case -1:
-    break;
-  case 1:
-    GuestUtil.addGuest(guests);
-    break;
-  case 2:
-    GuestUtil.checkOutGuest(intInput("Enter guest ID: "), guests);
-    break;
-  case 3:
-    GuestUtil.changeGuestInfo(guests);
-    break;
-  case 4:
-    GuestUtil.showGuests(guests);
-    break;
-  case 5:
-    System.out.print("Enter guest keyword: ");
-    String search = scanner.next();
-    if (isInteger(search)) {
-      int searchInt = Integer.parseInt(search);
-      GuestUtil.showSearch(searchInt, guests);
-    } else GuestUtil.showSearch(search, guests);
-    break;
-  default:
-    System.out.println("Not valid");
-  }
+
+public static void bookingMenu(){
+  System.out.println("1: Create booking, 2: Extend stay, 3: Staff menu, 4: Room menu");
 }
-
 
 public static void staffMenu(){
   Scanner scanner = new Scanner(System.in);
