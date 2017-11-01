@@ -48,7 +48,7 @@ public boolean searchGuestID(int guestID){
 
 
 public String toString() {
-  return String.format("Name: %s %s \t Address: %s \t PhoneNumber: %d \t GuestID: %d ",
+  return String.format("Name: %s %-8s \t Address: %s \t PhoneNumber: %d \t GuestID: %d ",
                        firstName, lastName, address, phoneNumber, guestID);
 }
 
