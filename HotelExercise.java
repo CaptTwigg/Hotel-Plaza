@@ -4,9 +4,10 @@ import java.io.*;
 public class HotelExercise {
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
+  String guestFile = "guests.dat";
 
 
-  // GuestUtil.loadGuestFile("guests.dat", guests);
+  // GuestUtil.loadGuestFile(guestFile, guests);
 
   // guestUtil.showGuests(guests);
   generateGuests(30, guests);
@@ -16,7 +17,7 @@ public static void main(String[] args) throws Exception {
   // checkOutGuest(6, guests);
   // System.out.println();
   // showGuests(guests);
-  // saveGuestsToFile("guests.dat", guests);
+  // saveGuestsToFile(guestFile, guests);
   // showGuests(guests);
   while (true) interFace(guests);
 }
@@ -54,9 +55,11 @@ public static void interFace(ArrayList<Guest> guests) throws Exception {
 
 public static void guestMenu(ArrayList<Guest> guests) throws Exception {
   Scanner scanner = new Scanner(System.in);
-  System.out.println("1: Add guest, 2: Checkout guest, 3: Change guest info, 4: Show guests, 5: Search guest");
+  System.out.println("1: Add guest, 2: Checkout guest, 3: Change guest info, 4: Show guests, 5: Search guest, -1: Back to main menu");
 
   switch (intInput("Enter Menu Number: ")) {
+  case -1:
+    break;
   case 1:
     GuestUtil.addGuest(guests);
     break;
@@ -64,7 +67,7 @@ public static void guestMenu(ArrayList<Guest> guests) throws Exception {
     GuestUtil.checkOutGuest(intInput("Enter guest ID: "), guests);
     break;
   case 3:
-    System.out.println("Comming soon");
+    GuestUtil.changeGuestInfo(guests);
     break;
   case 4:
     GuestUtil.showGuests(guests);

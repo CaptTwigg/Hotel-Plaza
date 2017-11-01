@@ -6,6 +6,9 @@ public class GuestUtil {
 
 /*
    Guest related methods:
+   changeGuestInfo
+   changeGuestInfoMenu
+   showSearch - by String or int
    checkOutGuest
    searchGuest - by String or int
    searchGuestID
@@ -15,6 +18,47 @@ public class GuestUtil {
    loadGuestFile
    showGuests
  */
+
+public static void changeGuestInfo(ArrayList<Guest> guests){
+  int ID;
+  int guestIndex;
+  do {
+    ID = intInput("Enter guest ID: ");
+    showSearch(ID, guests);
+    guestIndex = searchGuestID(ID, guests);
+  } while (guestIndex == -1);
+  changeGuestInfoMenu(guestIndex, guests);
+}
+
+public static void changeGuestInfoMenu(int guestIndex, ArrayList<Guest> guests){
+  Scanner scanner = new Scanner(System.in);
+
+  System.out.println("1: First name, 2: Last name, 3: Address, 4: Phone number, -1: Back to main menu");
+  int changeMenu = intInput("Enter menu number: ");
+
+  switch (changeMenu) {
+  case -1:
+    break;
+  case 1:
+    System.out.print("Enter new first name: ");
+    guests.get(guestIndex).setFirstName(scanner.next());
+    break;
+  case 2:
+    System.out.print("Enter new last name: ");
+    guests.get(guestIndex).setLastName(scanner.next());
+    break;
+  case 3:
+    System.out.print("Enter new address name: ");
+    guests.get(guestIndex).setAddress(scanner.next());
+    break;
+  case 4:
+    guests.get(guestIndex).setPhoneNumber(intInput("Enter new phone number: "));
+    break;
+  default:
+    System.out.println("Now valid menu number");
+    changeGuestInfoMenu(guestIndex, guests);
+  }
+}
 
 public static void showSearch(String search, ArrayList<Guest> guests){
   ArrayList<Guest> holder = searchGuest(search, guests);
@@ -112,7 +156,7 @@ public static void loadGuestFile(String file, ArrayList<Guest> guests) throws Ex
 }
 
 public static void showGuests(ArrayList<Guest> guests){
-  for (Guest i : guests) System.out.println(i.toString());
+  for (Guest guest : guests) System.out.println(guest.toString());
 }
 
 public static int intInput(String message) {
