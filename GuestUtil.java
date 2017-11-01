@@ -18,17 +18,13 @@ public class GuestUtil {
 
 public static void showSearch(String search, ArrayList<Guest> guests){
   ArrayList<Guest> holder = searchGuest(search, guests);
-  for (int i = 0; i < holder.size(); i++) {
-    System.out.println(i + 1 + ": " + holder.get(i).toString());
-  }
+  showGuests(holder);
   if (holder.size() == 0) System.out.println("Guest not found");
 }
 
 public static void showSearch(int search, ArrayList<Guest> guests){
   ArrayList<Guest> holder = searchGuest(search, guests);
-  for (int i = 0; i < holder.size(); i++) {
-    System.out.println(i + 1 + ": " + holder.get(i).toString());
-  }
+  showGuests(holder);
   if (holder.size() == 0) System.out.println("Guest not found");
 }
 
