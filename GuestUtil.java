@@ -196,7 +196,7 @@ public static int intInput(String message) {
     System.out.print(message);
     num = (new Scanner(System.in)).nextInt();
   } catch (InputMismatchException e) {
-    System.out.println("Enter number, please");
+    System.out.println("Enter a number please");
     num = intInput(message);
   }
 

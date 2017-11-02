@@ -5,29 +5,30 @@ public class HotelExercise {
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
   ArrayList<Booking> booking = new ArrayList<>();
+  String guestFile = "guests.dat";
 
-  Employee emp = new Employee("bob", "kageMester", 22);
-  Director dir = new Director("bob", "kageMester", 22);
+  // Employee emp = new Employee("bob", "kageMester", 22);
+  // Director dir = new Director("bob", "kageMester", 22);
+  //
+  // System.out.println(emp);
+  // System.out.println(dir);
 
-  System.out.println(emp);
-  System.out.println(dir);
 
-
-  // String guestFile = "guests.dat";
   //
   // Booking book = new Booking("20/02/2017", "10/02/2017", 22, 22);
+  // System.out.println(book.checkDates("20/02/2017", "10/02/2017"));
   // System.out.println(book.getNumberOfDays());
   // System.out.println(book.getEndDate());
   // book.setEndDate("25/2/2017");
   // System.out.println(book.getEndDate());
   // System.out.println(book.getNumberOfDays());
   //
-  // GuestUtil.loadGuestFile(guestFile, guests);
+  GuestUtil.loadGuestFile(guestFile, guests);
   //
   // generateGuests(30, guests);
   //
   // // saveGuestsToFile(guestFile, guests);
-  // while (true) interFace(guests, booking);
+  while (true) interFace(guests, booking);
 }
 
 /*
@@ -38,14 +39,14 @@ public static void main(String[] args) throws Exception {
  */
 
 public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> booking) throws Exception {
-  System.out.println("1: Guest menu, 2: Booking menu, 3: Staff menu, 4: Room menu");
+  System.out.println("\n1: Guest menu, 2: Booking menu, 3: Staff menu, 4: Room menu");
 
   switch (intInput("Enter Menu Number: ")) {
   case 1:
     GuestUtil.guestMenu(guests);
     break;
   case 2:
-    bookingMenu(booking, guests);
+    BookingUtil.bookingMenu(booking, guests);
     break;
   case 3:
     System.out.println("Comming soon");
@@ -54,46 +55,20 @@ public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> booking
     System.out.println("Comming soon");
     break;
   default:
-    System.out.println("Not valid");
+    System.out.println("Not valid menu number");
   }
 }
 
 
-
-public static void bookingMenu(ArrayList<Booking> booking, ArrayList<Guest> guests) throws Exception {
-  Scanner scanner = new Scanner(System.in);
-  System.out.println("1: Create booking, 2: Extend stay, 3: Show bookings, 4: Change booking info");
-
-  switch (intInput("Enter Menu Number: ")) {
-  case 1:
-    createBooking(booking, guests);
-    break;
-  case 2:
-    System.out.print("Enter new end date. dd/mm/yyyy: ");
-    // scanner.next().setEndDate();
-    break;
-  }
-}
-
-public static void createBooking(ArrayList<Booking> booking, ArrayList<Guest> guests) throws Exception {
-  Scanner scanner = new Scanner(System.in);
-  GuestUtil.addGuest(guests);
-  int getID = guests.get(guests.size() - 1).getGuestID();
-  int addRoom = 12;
-
-  System.out.print("Enter start date. dd/mm/yyyy: ");
-  String startDate = scanner.next();
-  System.out.print("Enter end date. dd/mm/yyyy: ");
-  String endDate = scanner.next();
-
-  booking.add(new Booking(startDate, endDate, addRoom, getID));
-}
 
 public static void staffMenu(){
   Scanner scanner = new Scanner(System.in);
   System.out.println("");
   scanner.close();
 }
+
+
+
 
 /*
    Helper methods:
@@ -106,7 +81,7 @@ public static int intInput(String message) {
     System.out.print(message);
     num = (new Scanner(System.in)).nextInt();
   } catch (InputMismatchException e) {
-    System.out.println("Enter number, please");
+    System.out.println("Enter a number please");
     num = intInput(message);
   }
 
