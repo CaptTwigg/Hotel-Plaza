@@ -85,7 +85,7 @@ public static void changeGuestInfoMenu(int guestIndex, ArrayList<Guest> guests){
       guests.get(guestIndex).setLastName(scanner.next());
       break;
     case 3:
-      System.out.print("Enter new address name: ");
+      System.out.print("Enter new address: ");
       guests.get(guestIndex).setAddress(scanner.next());
       break;
     case 4:
