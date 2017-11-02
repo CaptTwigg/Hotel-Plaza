@@ -8,7 +8,6 @@ private String firstName;
 private String lastName;
 private String address;
 private int phoneNumber;
-private int roomID;
 
 public Guest(int guestID, String firstName, String lastName, String address, int phoneNumber) {
   this.guestID = guestID;
@@ -90,13 +89,5 @@ public int getPhoneNumber() {
 
 public void setPhoneNumber(int phoneNumber) {
   this.phoneNumber = phoneNumber;
-}
-
-public int getRoomID() {
-  return roomID;
-}
-
-public void setRoomID(int roomID) {
-  this.roomID = roomID;
 }
 }

@@ -59,6 +59,26 @@ public static void changeBookingInfoMenu(int bookingIndex, ArrayList<Booking> bo
   } while (again);
 }
 
+public static void loadFile(String file, ArrayList<Booking> bookings) throws Exception {
+  Scanner scanner = new Scanner(new File(file));
+
+  while (scanner.hasNextLine()) {
+    String booking = scanner.nextLine();
+    Scanner lineScan = new Scanner(booking);
+
+    bookings.add(new Booking(lineScan.next(), lineScan.next(), lineScan.nextInt(), lineScan.nextInt()));
+    lineScan.close();
+  }
+  scanner.close();
+}
+
+public static void saveToFile(String file, ArrayList<Booking> bookings) throws Exception {
+  new PrintStream(new File(file));
+  for (int i = 0; i < bookings.size(); i++) {
+    bookings.get(i).saveToFile(file);
+  }
+}
+
 public static void setEndDate(ArrayList<Booking> bookings){
   Scanner scanner = new Scanner(System.in);
   int index = intInput("Enter booking number: ") - 1;
@@ -103,6 +123,7 @@ public static boolean checkDates(String date1, String date2){
   return date1A[1] >= date2A[1] && date1A[2] >= date2A[2];
 }
 public static boolean checkDateFormat(String date){
+  if (date.split("\\W").length == 0) return false;
   String[] splitDate = date.split("\\D+");
 
   for (int i = 0; i < 3; i++) {

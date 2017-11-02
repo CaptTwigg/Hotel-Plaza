@@ -18,6 +18,14 @@ public Booking(String startDate, String endDate, int roomID, int guestID) {
   this.guestID = guestID;
 }
 
+public void saveToFile(String file) throws IOException {
+  FileWriter writer = new FileWriter(new File(file), true);
+  String booking = String.format("%s %s %d %d", startDate, endDate, roomID, guestID);
+  writer.write(booking + "\n");
+  writer.flush();
+  writer.close();
+}
+
 public boolean checkDates(String date1, String date2){
   int[] date1A = new int[3];
   int[] date2A = new int[3];
@@ -63,7 +71,7 @@ public static boolean isInteger(String s) {
 
 
 public String toString() {
-  return "Booking [startDate=" + startDate + ", endDate=" + endDate + ", numberOfDays=" + numberOfDays + ", roomID=" + roomID + ", guestID=" + guestID + "]";
+  return String.format("StartDate: %s EndDate: %s NumberOfDays: %d RoomID: %d GuestID: %d", startDate, endDate, numberOfDays, roomID, guestID);
 }
 
 public String getStartDate() {

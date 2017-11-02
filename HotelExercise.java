@@ -4,17 +4,10 @@ import java.io.*;
 public class HotelExercise {
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
-  ArrayList<Booking> booking = new ArrayList<>();
+  ArrayList<Booking> bookings = new ArrayList<>();
   String guestFile = "guests.dat";
 
-  // Employee emp = new Employee("bob", "kageMester", 22);
-  // Director dir = new Director("bob", "kageMester", 22);
-  //
-  // System.out.println(emp);
-  // System.out.println(dir);
 
-
-  //
   // Booking book = new Booking("20/02/2017", "10/02/2017", 22, 22);
   // System.out.println(book.checkDates("20/02/2017", "10/02/2017"));
   // System.out.println(book.getNumberOfDays());
@@ -22,13 +15,14 @@ public static void main(String[] args) throws Exception {
   // book.setEndDate("25/2/2017");
   // System.out.println(book.getEndDate());
   // System.out.println(book.getNumberOfDays());
-  //
+
   GuestUtil.loadGuestFile(guestFile, guests);
-  //
+  BookingUtil.loadFile("booking.dat", bookings);
   // generateGuests(30, guests);
-  //
-  interFace(guests, booking);
-  GuestUtil.saveGuestsToFile(guestFile, guests);
+
+  interFace(guests, bookings);
+  // GuestUtil.saveGuestsToFile(guestFile, guests);
+  BookingUtil.saveToFile("booking.dat", bookings);
 }
 
 /*
@@ -38,7 +32,7 @@ public static void main(String[] args) throws Exception {
    staffMenu
  */
 
-public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> booking) throws Exception {
+public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> bookings) throws Exception {
   boolean again = true;
   do {
     System.out.println("\n1: Guest menu, 2: Booking menu, 3: Staff menu, 4: Room menu");
@@ -50,7 +44,7 @@ public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> booking
       GuestUtil.guestMenu(guests);
       break;
     case 2:
-      BookingUtil.bookingMenu(booking, guests);
+      BookingUtil.bookingMenu(bookings, guests);
       break;
     case 3:
       System.out.println("Comming soon");
@@ -64,15 +58,9 @@ public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> booking
   } while (again);
 }
 
-
-
-public static void staffMenu(){
-  Scanner scanner = new Scanner(System.in);
-  System.out.println("");
-  scanner.close();
+public static void roomMenu(){
+  System.out.println("1: Create room, 2: Change price for room");
 }
-
-
 
 
 /*
