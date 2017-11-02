@@ -8,7 +8,6 @@ private String firstName;
 private String lastName;
 private String address;
 private int phoneNumber;
-private int roomID;
 
 public Guest(int guestID, String firstName, String lastName, String address, int phoneNumber) {
   this.guestID = guestID;
@@ -48,7 +47,7 @@ public boolean searchGuestID(int guestID){
 
 
 public String toString() {
-  return String.format("Name: %s %-8s \t Address: %s \t PhoneNumber: %d \t GuestID: %d ",
+  return String.format("Name: %s %-8s \t Address: %-8s \t PhoneNumber: %d \t GuestID: %d ",
                        firstName, lastName, address, phoneNumber, guestID);
 }
 
@@ -90,13 +89,5 @@ public int getPhoneNumber() {
 
 public void setPhoneNumber(int phoneNumber) {
   this.phoneNumber = phoneNumber;
-}
-
-public int getRoomID() {
-  return roomID;
-}
-
-public void setRoomID(int roomID) {
-  this.roomID = roomID;
 }
 }

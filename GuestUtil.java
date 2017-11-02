@@ -20,34 +20,39 @@ public class GuestUtil {
 
 public static void guestMenu(ArrayList<Guest> guests) throws Exception {
   Scanner scanner = new Scanner(System.in);
-  System.out.println("1: Add guest, 2: Checkout guest, 3: Change guest info, 4: Show guests, 5: Search guest, -1: Back to main menu");
 
-  switch (intInput("Enter Menu Number: ")) {
-  case -1:
-    break;
-  case 1:
-    GuestUtil.addGuest(guests);
-    break;
-  case 2:
-    GuestUtil.checkOutGuest(intInput("Enter guest ID: "), guests);
-    break;
-  case 3:
-    GuestUtil.changeGuestInfo(guests);
-    break;
-  case 4:
-    GuestUtil.showGuests(guests);
-    break;
-  case 5:
-    System.out.print("Enter guest keyword: ");
-    String search = scanner.next();
-    if (isInteger(search)) {
-      int searchInt = Integer.parseInt(search);
-      GuestUtil.showSearch(searchInt, guests);
-    } else GuestUtil.showSearch(search, guests);
-    break;
-  default:
-    System.out.println("Not valid");
-  }
+  boolean again = true;
+  do {
+    System.out.println("\n1: Add guest, 2: Checkout guest, 3: Change guest info, 4: Show guests, 5: Search guest, -1: Back to main menu");
+
+    switch (intInput("Enter Menu Number: ")) {
+    case -1:
+      again = false;
+      break;
+    case 1:
+      GuestUtil.addGuest(guests);
+      break;
+    case 2:
+      GuestUtil.checkOutGuest(intInput("Enter guest ID: "), guests);
+      break;
+    case 3:
+      GuestUtil.changeGuestInfo(guests);
+      break;
+    case 4:
+      GuestUtil.showGuests(guests);
+      break;
+    case 5:
+      System.out.print("Enter guest keyword: ");
+      String search = scanner.next();
+      if (isInteger(search)) {
+        int searchInt = Integer.parseInt(search);
+        GuestUtil.showSearch(searchInt, guests);
+      } else GuestUtil.showSearch(search, guests);
+      break;
+    default:
+      System.out.println("Not valid");
+    }
+  } while (again);
 }
 
 public static void changeGuestInfo(ArrayList<Guest> guests){
@@ -63,32 +68,33 @@ public static void changeGuestInfo(ArrayList<Guest> guests){
 
 public static void changeGuestInfoMenu(int guestIndex, ArrayList<Guest> guests){
   Scanner scanner = new Scanner(System.in);
+  boolean again = true;
+  do {
+    System.out.println("\n1: First name, 2: Last name, 3: Address, 4: Phone number, -1: Back to main menu");
 
-  System.out.println("1: First name, 2: Last name, 3: Address, 4: Phone number, -1: Back to main menu");
-  int changeMenu = intInput("Enter menu number: ");
-
-  switch (changeMenu) {
-  case -1:
-    break;
-  case 1:
-    System.out.print("Enter new first name: ");
-    guests.get(guestIndex).setFirstName(scanner.next());
-    break;
-  case 2:
-    System.out.print("Enter new last name: ");
-    guests.get(guestIndex).setLastName(scanner.next());
-    break;
-  case 3:
-    System.out.print("Enter new address name: ");
-    guests.get(guestIndex).setAddress(scanner.next());
-    break;
-  case 4:
-    guests.get(guestIndex).setPhoneNumber(intInput("Enter new phone number: "));
-    break;
-  default:
-    System.out.println("Now valid menu number");
-    changeGuestInfoMenu(guestIndex, guests);
-  }
+    switch (intInput("Enter menu number: ")) {
+    case -1:
+      again = false;
+      break;
+    case 1:
+      System.out.print("Enter new first name: ");
+      guests.get(guestIndex).setFirstName(scanner.next());
+      break;
+    case 2:
+      System.out.print("Enter new last name: ");
+      guests.get(guestIndex).setLastName(scanner.next());
+      break;
+    case 3:
+      System.out.print("Enter new address: ");
+      guests.get(guestIndex).setAddress(scanner.next());
+      break;
+    case 4:
+      guests.get(guestIndex).setPhoneNumber(intInput("Enter new phone number: "));
+      break;
+    default:
+      System.out.println("Now valid menu number");
+    }
+  } while (again);
 }
 
 public static void showSearch(String search, ArrayList<Guest> guests){
@@ -153,7 +159,7 @@ public static void addGuest(ArrayList<Guest> guests) throws Exception {
   String lastName = scanner.next();
   System.out.print("Enter address: ");
   String address = scanner.next();
-  int phoneNumber = intInput("Enter phone number");
+  int phoneNumber = intInput("Enter phone number: ");
 
   guests.add(new Guest(updateGuestID(guests), firstName, lastName, address, phoneNumber));
 }
@@ -196,7 +202,7 @@ public static int intInput(String message) {
     System.out.print(message);
     num = (new Scanner(System.in)).nextInt();
   } catch (InputMismatchException e) {
-    System.out.println("Enter number, please");
+    System.out.println("Enter a number please");
     num = intInput(message);
   }
 
