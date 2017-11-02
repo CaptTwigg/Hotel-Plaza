@@ -1,5 +1,7 @@
 **Hotel Plaza Exercise**
 
+Part 2: https://docs.google.com/document/d/1ACpabuobD7inQn-UiQdwTDRdG2e_w1hIYcrOBVPyokk/edit
+
 (using classes and objects)
 
 In groups of 3 persons
