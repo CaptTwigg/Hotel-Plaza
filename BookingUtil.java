@@ -23,6 +23,7 @@ public static void bookingMenu(ArrayList<Booking> bookings, ArrayList<Guest> gue
       break;
     case 4:
       changeBookingInfoMenu(intInput("Enter booking number: ") - 1, bookings);
+      break;
     default:
       System.out.println("Not valid menu number");
     }
@@ -81,11 +82,12 @@ public static void saveToFile(String file, ArrayList<Booking> bookings) throws E
 
 public static void setEndDate(ArrayList<Booking> bookings){
   Scanner scanner = new Scanner(System.in);
-  int index = intInput("Enter booking number: ") - 1;
+  int index = intInput("Enter booking number: ");
   String date;
+
   do {
     System.out.print("Enter new end date. dd/mm/yyyy: ");
-    date = scanner.next();
+    date = scanner.nextLine();
   } while (checkDateFormat(date));
   bookings.get(index).setEndDate(date);
 }
@@ -97,12 +99,13 @@ public static void createBooking(ArrayList<Booking> booking, ArrayList<Guest> gu
   int addRoom = 12;
   String startDate;
   String endDate;
+
   do {
     System.out.print("Enter start date. dd/mm/yyyy: ");
     startDate = scanner.nextLine();
     System.out.print("Enter end date. dd/mm/yyyy: ");
     endDate = scanner.nextLine();
-    if (checkDates(startDate, endDate)) System.out.println("Not valid date format");
+    if (checkDates(startDate, endDate)) System.out.println("Not valid date format3");
   } while (checkDates(startDate, endDate));
 
   booking.add(new Booking(startDate, endDate, addRoom, getID));
@@ -113,6 +116,10 @@ public static boolean checkDates(String date1, String date2){
   int[] date2A = new int[3];
   String[] splitDate1 = date1.split("\\D+");
   String[] splitDate2 = date2.split("\\D+");
+  if (splitDate1.length != 3) return true;
+  if (splitDate2.length != 3) return true;
+  if (checkDateFormat(date1)) return true;
+  if (checkDateFormat(date2)) return true;
 
   for (int i = 0; i < 3; i++) {
     if (!isInteger(splitDate1[i])) return false;
@@ -122,14 +129,16 @@ public static boolean checkDates(String date1, String date2){
   }
   return date1A[1] >= date2A[1] && date1A[2] >= date2A[2];
 }
+
 public static boolean checkDateFormat(String date){
-  if (date.split("\\W").length == 0) return false;
-  String[] splitDate = date.split("\\D+");
+  if (date.split("\\s").length > 1) return true;
+  String[] splitDate = date.split("\\D");
+  if (splitDate.length != 3) return true;
 
   for (int i = 0; i < 3; i++) {
-    if (!isInteger(splitDate[i])) return false;
+    if (!isInteger(splitDate[i])) return true;
   }
-  return true;
+  return false;
 }
 
 public static void showBookings(ArrayList<Booking> bookings){
@@ -137,6 +146,7 @@ public static void showBookings(ArrayList<Booking> bookings){
     System.out.println(i + 1 + " " + bookings.get(i).toString());
   }
 }
+
 public static int intInput(String message) {
   int num = 0;
   try {
