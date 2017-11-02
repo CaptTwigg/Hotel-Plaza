@@ -16,14 +16,45 @@ public static void bookingMenu(ArrayList<Booking> bookings, ArrayList<Guest> gue
       createBooking(bookings, guests);
       break;
     case 2:
-      showBookings(bookings);
       setEndDate(bookings);
       break;
     case 3:
       showBookings(bookings);
       break;
+    case 4:
+      changeBookingInfoMenu(intInput("Enter booking number: ") - 1, bookings);
     default:
       System.out.println("Not valid menu number");
+    }
+  } while (again);
+}
+
+public static void changeBookingInfoMenu(int bookingIndex, ArrayList<Booking> bookings){
+  Scanner scanner = new Scanner(System.in);
+  boolean again = true;
+  do {
+    System.out.println("\n1: Start date, 2: End date, 3: roomID, 4: guestID, -1: Back to main menu");
+
+    switch (intInput("Enter menu number: ")) {
+    case -1:
+      again = false;
+      break;
+    case 1:
+      System.out.print("Enter new start date: ");
+      bookings.get(bookingIndex).setStartDate(scanner.next());
+      break;
+    case 2:
+      System.out.print("Enter new end date: ");
+      bookings.get(bookingIndex).setEndDate(scanner.next());
+      break;
+    case 3:
+      bookings.get(bookingIndex).setRoomID(intInput("Enter new room ID: "));
+      break;
+    case 4:
+      bookings.get(bookingIndex).setGuestID(intInput("Enter new guest ID: "));
+      break;
+    default:
+      System.out.println("Now valid menu number");
     }
   } while (again);
 }

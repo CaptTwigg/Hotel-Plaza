@@ -27,8 +27,8 @@ public static void main(String[] args) throws Exception {
   //
   // generateGuests(30, guests);
   //
-  // // saveGuestsToFile(guestFile, guests);
-  while (true) interFace(guests, booking);
+  interFace(guests, booking);
+  GuestUtil.saveGuestsToFile(guestFile, guests);
 }
 
 /*
@@ -39,24 +39,29 @@ public static void main(String[] args) throws Exception {
  */
 
 public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> booking) throws Exception {
-  System.out.println("\n1: Guest menu, 2: Booking menu, 3: Staff menu, 4: Room menu");
-
-  switch (intInput("Enter Menu Number: ")) {
-  case 1:
-    GuestUtil.guestMenu(guests);
-    break;
-  case 2:
-    BookingUtil.bookingMenu(booking, guests);
-    break;
-  case 3:
-    System.out.println("Comming soon");
-    break;
-  case 4:
-    System.out.println("Comming soon");
-    break;
-  default:
-    System.out.println("Not valid menu number");
-  }
+  boolean again = true;
+  do {
+    System.out.println("\n1: Guest menu, 2: Booking menu, 3: Staff menu, 4: Room menu");
+    switch (intInput("Enter Menu Number: ")) {
+    case 404:
+      again = false;
+      break;
+    case 1:
+      GuestUtil.guestMenu(guests);
+      break;
+    case 2:
+      BookingUtil.bookingMenu(booking, guests);
+      break;
+    case 3:
+      System.out.println("Comming soon");
+      break;
+    case 4:
+      System.out.println("Comming soon");
+      break;
+    default:
+      System.out.println("Not valid menu number");
+    }
+  } while (again);
 }
 
 
