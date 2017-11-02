@@ -16,8 +16,4 @@ public Room(int roomID, int numberOfBeds, boolean internetAcces, int price, int 
 public void changePrice(int price){
   this.price = price;
 }
-
-public String toString(){
-  return String.format("roomID: %d numberOfBeds: %d internetAcces: %b price: %d floor: %d",
-}
 }
