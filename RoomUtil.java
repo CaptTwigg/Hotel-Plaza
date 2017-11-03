@@ -28,6 +28,7 @@ public static void roomMenu(ArrayList<Room> rooms) throws Exception {
       createRoom(rooms);
       break;
     case 2:
+      showRooms(rooms);
       changeRoomInfo(rooms);
       break;
     case 3:

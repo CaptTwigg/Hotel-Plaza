@@ -30,24 +30,25 @@ public static void guestMenu(ArrayList<Guest> guests) throws Exception {
       again = false;
       break;
     case 1:
-      GuestUtil.addGuest(guests);
+      addGuest(guests);
       break;
     case 2:
-      GuestUtil.checkOutGuest(intInput("Enter guest ID: "), guests);
+      checkOutGuest(intInput("Enter guest ID: "), guests);
       break;
     case 3:
-      GuestUtil.changeGuestInfo(guests);
+      showGuests(guests);
+      changeGuestInfo(guests);
       break;
     case 4:
-      GuestUtil.showGuests(guests);
+      showGuests(guests);
       break;
     case 5:
       System.out.print("Enter guest keyword: ");
       String search = scanner.next();
       if (isInteger(search)) {
         int searchInt = Integer.parseInt(search);
-        GuestUtil.showSearch(searchInt, guests);
-      } else GuestUtil.showSearch(search, guests);
+        showSearch(searchInt, guests);
+      } else showSearch(search, guests);
       break;
     default:
       System.out.println("Not valid");

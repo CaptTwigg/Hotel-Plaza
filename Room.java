@@ -72,6 +72,6 @@ public void setFloor(int floor) {
 
 
 public String toString() {
-  return String.format("RoomID: %d \t Number of beds: %d \t Internet acces %b \t Price: %d \t Floor %d", roomID, numberOfBeds, internetAcces, price, floor);
+  return String.format("RoomID: %d \t Number of beds: %d \t Internet acces: %b \t Price: %d \t Floor: %d", roomID, numberOfBeds, internetAcces, price, floor);
 }
 }

@@ -8,18 +8,24 @@ public static void main(String[] args) throws Exception {
   ArrayList<Staff> staffs = new ArrayList<>();
   ArrayList<Room> rooms = new ArrayList<>();
 
-
-
-
   String guestFile = "guests.dat";
+  String bookingFile = "booking.dat";
+  String staffFile = "staffs.dat";
+  String roomFile = "rooms.dat";
 
   GuestUtil.loadGuestFile(guestFile, guests);
-  BookingUtil.loadFile("booking.dat", bookings);
-  // generateGuests(30, guests);
+  BookingUtil.loadFile(bookingFile, bookings);
+  // StaffUtil.loadFile(staffFile, staffs);
+  RoomUtil.loadFile(roomFile, rooms);
 
   interFace(guests, bookings, staffs, rooms);
-  // GuestUtil.saveGuestsToFile(guestFile, guests);
-  BookingUtil.saveToFile("booking.dat", bookings);
+
+  GuestUtil.saveGuestsToFile(guestFile, guests);
+  BookingUtil.saveToFile(bookingFile, bookings);
+  // StaffUtil.saveToFile(staffFile, staffs);
+  RoomUtil.saveToFile(roomFile, rooms);
+
+  // generateGuests(30, guests);
 }
 
 /*
@@ -42,7 +48,7 @@ public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> booking
       GuestUtil.guestMenu(guests);
       break;
     case 2:
-      BookingUtil.bookingMenu(bookings, guests);
+      BookingUtil.bookingMenu(bookings, guests, rooms);
       break;
     case 3:
       // StaffUtil.staffMenu(staffs);
@@ -56,16 +62,14 @@ public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> booking
   } while (again);
 }
 
-public static void roomMenu(){
-  System.out.println("1: Create room, 2: Change price for room");
-}
+
 
 
 /*
    Helper methods:
    intInput loops input until number is given
-   isInteger checks if String is a int and return true/false
  */
+
 public static int intInput(String message) {
   int num = 0;
   try {
@@ -77,16 +81,6 @@ public static int intInput(String message) {
   }
 
   return num;
-}
-
-public static boolean isInteger(String s) {
-  try{
-    Integer.parseInt(s);
-    return true;
-  }
-  catch (NumberFormatException ex) {
-    return false;
-  }
 }
 
 /*

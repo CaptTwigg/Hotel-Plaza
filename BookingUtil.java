@@ -2,7 +2,21 @@ import java.util.*;
 import java.io.*;
 
 public class BookingUtil {
-public static void bookingMenu(ArrayList<Booking> bookings, ArrayList<Guest> guests) throws Exception {
+/*
+   Helper methods for booking:
+   bookingMenu
+   changeBookingInfoMenu
+   loadFIle
+   saveToFile
+   extendStay
+   createBooking
+   chooseRoom
+   checkDates
+   checkDateFormat
+   showBookings
+ */
+
+public static void bookingMenu(ArrayList<Booking> bookings, ArrayList<Guest> guests, ArrayList<Room> rooms) throws Exception {
   Scanner scanner = new Scanner(System.in);
   boolean again = true;
   do {
@@ -13,16 +27,17 @@ public static void bookingMenu(ArrayList<Booking> bookings, ArrayList<Guest> gue
       again = false;
       break;
     case 1:
-      createBooking(bookings, guests);
+      createBooking(bookings, guests, rooms);
       break;
     case 2:
-      setEndDate(bookings);
+      extendStay(bookings);
       break;
     case 3:
       showBookings(bookings);
       break;
     case 4:
-      changeBookingInfoMenu(intInput("Enter booking number: ") - 1, bookings);
+      showBookings(bookings);
+      changeBookingInfoMenu(intInput("Enter booking number: ") - 1, bookings, rooms);
       break;
     default:
       System.out.println("Not valid menu number");
@@ -30,7 +45,7 @@ public static void bookingMenu(ArrayList<Booking> bookings, ArrayList<Guest> gue
   } while (again);
 }
 
-public static void changeBookingInfoMenu(int bookingIndex, ArrayList<Booking> bookings){
+public static void changeBookingInfoMenu(int bookingIndex, ArrayList<Booking> bookings, ArrayList<Room> rooms){
   Scanner scanner = new Scanner(System.in);
   boolean again = true;
   do {
@@ -80,7 +95,7 @@ public static void saveToFile(String file, ArrayList<Booking> bookings) throws E
   }
 }
 
-public static void setEndDate(ArrayList<Booking> bookings){
+public static void extendStay(ArrayList<Booking> bookings){
   Scanner scanner = new Scanner(System.in);
   int index = intInput("Enter booking number: ");
   String date;
@@ -92,11 +107,11 @@ public static void setEndDate(ArrayList<Booking> bookings){
   bookings.get(index).setEndDate(date);
 }
 
-public static void createBooking(ArrayList<Booking> booking, ArrayList<Guest> guests) throws Exception {
+public static void createBooking(ArrayList<Booking> booking, ArrayList<Guest> guests, ArrayList<Room> rooms) throws Exception {
   Scanner scanner = new Scanner(System.in);
   GuestUtil.addGuest(guests);
-  int getID = guests.get(guests.size() - 1).getGuestID();
-  int addRoom = 12;
+  int guestID = guests.get(guests.size() - 1).getGuestID();
+  int roomID = chooseRoom(rooms);
   String startDate;
   String endDate;
 
@@ -108,7 +123,12 @@ public static void createBooking(ArrayList<Booking> booking, ArrayList<Guest> gu
     if (checkDates(startDate, endDate)) System.out.println("Not valid date format3");
   } while (checkDates(startDate, endDate));
 
-  booking.add(new Booking(startDate, endDate, addRoom, getID));
+  booking.add(new Booking(startDate, endDate, roomID, guestID));
+}
+
+public static int chooseRoom(ArrayList<Room> rooms){
+  RoomUtil.showRooms(rooms);
+  return intInput("Enter room ID: ");
 }
 
 public static boolean checkDates(String date1, String date2){
@@ -146,6 +166,12 @@ public static void showBookings(ArrayList<Booking> bookings){
     System.out.println(i + 1 + " " + bookings.get(i).toString());
   }
 }
+
+/*
+   Helper methods:
+   intInput loops input until number is given
+   isInteger checks if String is a int and return true/false
+ */
 
 public static int intInput(String message) {
   int num = 0;
