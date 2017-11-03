@@ -1,3 +1,7 @@
+import java.util.*;
+import java.io.*;
+
+
 public class Room {
 private int roomID;
 private int numberOfBeds;
@@ -13,8 +17,16 @@ public Room(int roomID, int numberOfBeds, boolean internetAcces, int price, int 
   this.floor = floor;
 }
 
-public String saveToFile(){
-  return String.format("%d %d %b %d %d", roomID, numberOfBeds, internetAcces, price, floor);
+public void saveToFile(String file) throws Exception {
+  FileWriter writer = new FileWriter(new File(file), true);
+  String room = String.format("%d %d %b %d %d", roomID, numberOfBeds, internetAcces, price, floor);
+  writer.write(room + "\n");
+  writer.flush();
+  writer.close();
+}
+
+public boolean searchID(int roomID){
+  return this.roomID == roomID;
 }
 
 public int getRoomID() {
@@ -59,8 +71,7 @@ public void setFloor(int floor) {
 
 
 
-@Override
 public String toString() {
-  return "Room [roomID=" + roomID + ", numberOfBeds=" + numberOfBeds + ", internetAcces=" + internetAcces + ", price=" + price + ", floor=" + floor + "]";
+  return String.format("RoomID: %d \t Number of beds: %d \t Internet acces %b \t Price: %d \t Floor %d", roomID, numberOfBeds, internetAcces, price, floor);
 }
 }
