@@ -20,6 +20,7 @@ public static void main(String[] args) throws Exception {
    Interface related methods:
    interface
    guestMenu menu for all guest methods
+   bookingMenu
    staffMenu
  */
 
