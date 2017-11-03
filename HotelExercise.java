@@ -5,13 +5,19 @@ public class HotelExercise {
 public static void main(String[] args) throws Exception {
   ArrayList<Guest> guests = new ArrayList<>();
   ArrayList<Booking> bookings = new ArrayList<>();
+  ArrayList<Staff> staffs = new ArrayList<>();
+  ArrayList<Room> rooms = new ArrayList<>();
+
+
+
+
   String guestFile = "guests.dat";
 
   GuestUtil.loadGuestFile(guestFile, guests);
   BookingUtil.loadFile("booking.dat", bookings);
   // generateGuests(30, guests);
 
-  interFace(guests, bookings);
+  interFace(guests, bookings, staffs, rooms);
   // GuestUtil.saveGuestsToFile(guestFile, guests);
   BookingUtil.saveToFile("booking.dat", bookings);
 }
@@ -24,7 +30,7 @@ public static void main(String[] args) throws Exception {
    staffMenu
  */
 
-public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> bookings) throws Exception {
+public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> bookings, ArrayList<Staff> staffs, ArrayList<Room> rooms) throws Exception {
   boolean again = true;
   do {
     System.out.println("\n1: Guest menu, 2: Booking menu, 3: Staff menu, 4: Room menu");
@@ -39,10 +45,10 @@ public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> booking
       BookingUtil.bookingMenu(bookings, guests);
       break;
     case 3:
-      System.out.println("Comming soon");
+      // StaffUtil.staffMenu(staffs);
       break;
     case 4:
-      System.out.println("Comming soon");
+      RoomUtil.roomMenu(rooms);
       break;
     default:
       System.out.println("Not valid menu number");

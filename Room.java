@@ -13,6 +13,9 @@ public Room(int roomID, int numberOfBeds, boolean internetAcces, int price, int 
   this.floor = floor;
 }
 
+public String saveToFile(){
+  return String.format("%d %d %b %d %d", roomID, numberOfBeds, internetAcces, price, floor);
+}
 
 public int getRoomID() {
   return roomID;
