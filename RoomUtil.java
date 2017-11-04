@@ -70,8 +70,8 @@ public static void changeRoomInfo(ArrayList<Room> rooms){
     ID = searchID(roomID, rooms);
   } while (searchID(roomID, rooms) == -1);
   do {
-    System.out.println("Choose what you want to change.");
-    System.out.println("\n1: Number of beds, 2: internetAcces, 3: Price, 4: Floor, -1 Back to rooms menu");
+    System.out.println("\nChoose what you want to change.");
+    System.out.println("1: Number of beds, 2: internetAcces, 3: Price, 4: Floor, -1 Back to rooms menu");
 
     switch (intInput("Enter menu number: ")) {
     case -1:

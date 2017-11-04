@@ -49,7 +49,7 @@ public static void changeBookingInfoMenu(int bookingIndex, ArrayList<Booking> bo
   Scanner scanner = new Scanner(System.in);
   boolean again = true;
   do {
-    System.out.println("\n1: Start date, 2: End date, 3: roomID, 4: guestID, -1: Back to main menu");
+    System.out.println("\n1: Start date, 2: End date, 3: roomID, 4: guestID, -1: Back to booking meun");
 
     switch (intInput("Enter menu number: ")) {
     case -1:
