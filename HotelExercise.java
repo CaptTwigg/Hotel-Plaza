@@ -15,7 +15,7 @@ public static void main(String[] args) throws Exception {
 
   GuestUtil.loadGuestFile(guestFile, guests);
   BookingUtil.loadFile(bookingFile, bookings);
-  // StaffUtil.loadFile(staffFile, staffs);
+  StaffUtil.loadFile(staffFile, staffs);
   RoomUtil.loadFile(roomFile, rooms);
 
   interFace(guests, bookings, staffs, rooms);
@@ -51,7 +51,7 @@ public static void interFace(ArrayList<Guest> guests, ArrayList<Booking> booking
       BookingUtil.bookingMenu(bookings, guests, rooms);
       break;
     case 3:
-      // StaffUtil.staffMenu(staffs);
+      StaffUtil.staffMenu(staffs);
       break;
     case 4:
       RoomUtil.roomMenu(rooms);
