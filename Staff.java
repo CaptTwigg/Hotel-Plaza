@@ -25,4 +25,49 @@ public void staffFile(String file) throws Exception {
   writer.flush();
   writer.close();
 }
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getTitel() {
+		return titel;
+	}
+
+	public void setTitel(String titel) {
+		this.titel = titel;
+	}
+
+	public int getTelephonenumber() {
+		return telephonenumber;
+	}
+
+	public void setTelephonenumber(int telephonenumber) {
+		this.telephonenumber = telephonenumber;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+
+	public String toString() {
+		return "Staff [firstName=" + firstName + ", lastName=" + lastName + ", titel=" + titel + ", telephonenumber=" + telephonenumber + ", salary=" + salary; 
+	}
 }
