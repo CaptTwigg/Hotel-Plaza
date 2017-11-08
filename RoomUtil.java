@@ -46,7 +46,7 @@ public static void createRoom(ArrayList<Room> rooms) throws Exception {
   int numberOfBeds = intInput("Enter number of beds: ");
   System.out.print("Enter internet acces true/false: ");
   boolean internetAcces = scanner.nextBoolean();
-  int price = intInput("Enter price: ");
+  int price = intInput("Enter price pr. night: ");
   int floor = intInput("Enter floor number: ");
 
   rooms.add(new Room(updateID(rooms), numberOfBeds, internetAcces, price, floor)); // Creating new object of room with input variables

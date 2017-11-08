@@ -75,6 +75,8 @@ public static void changeBookingInfoMenu(int bookingIndex, ArrayList<Booking> bo
   } while (again);
 }
 
+
+
 public static void loadFile(String file, ArrayList<Booking> bookings) throws Exception {
   Scanner scanner = new Scanner(new File(file));
 
@@ -107,7 +109,9 @@ public static void extendStay(ArrayList<Booking> bookings){
   bookings.get(index).setEndDate(date);
 }
 
-public static void createBooking(ArrayList<Booking> booking, ArrayList<Guest> guests, ArrayList<Room> rooms) throws Exception {
+
+
+public static void createBooking(ArrayList<Booking> bookings, ArrayList<Guest> guests, ArrayList<Room> rooms) throws Exception {
   Scanner scanner = new Scanner(System.in);
   GuestUtil.addGuest(guests);
   int guestID = guests.get(guests.size() - 1).getGuestID();
@@ -120,10 +124,32 @@ public static void createBooking(ArrayList<Booking> booking, ArrayList<Guest> gu
     startDate = scanner.nextLine();
     System.out.print("Enter end date. dd/mm/yyyy: ");
     endDate = scanner.nextLine();
-    if (checkDates(startDate, endDate)) System.out.println("Not valid date format3");
+    if (checkDates(startDate, endDate)) System.out.println("Not valid date format");
   } while (checkDates(startDate, endDate));
 
-  booking.add(new Booking(startDate, endDate, roomID, guestID));
+  bookings.add(new Booking(startDate, endDate, roomID, guestID));
+  bill(bookings, rooms, roomID, guestID, startDate, endDate);
+}
+
+public static void bill(ArrayList<Booking> bookings, ArrayList<Room> rooms, int roomID, int guestID, String startDate, String endDate){
+  int price = rooms.get(roomID - 1).getPrice();
+  int numberOfDays = bookings.get(bookings.size() - 1).getNumberOfDays();
+  System.out.println("+-----------------------------+");
+  System.out.println("|             Bill            |");
+  System.out.printf("|  Room number: %d             |\n", roomID);
+  System.out.printf("|  Guest number: %d           |\n", guestID);
+  System.out.println("|                             |");
+  System.out.println("+-----------------------------+");
+  System.out.printf("| Arrival: %-10s         |\n", startDate);
+  System.out.printf("| Departure: %-10s       |\n", endDate);
+  System.out.printf("| Room nights: %-4s           |\n", numberOfDays);
+  System.out.println("|                             |");
+  System.out.println("+-----------------------------+");
+  System.out.printf("|  Debit: %-5d               |\n", price * numberOfDays);
+  System.out.println("|                             |");
+  System.out.println("|     Thanks for staing at    |");
+  System.out.println("|        HotelExercise        |");
+  System.out.println("+-----------------------------+");
 }
 
 public static int chooseRoom(ArrayList<Room> rooms){
@@ -132,22 +158,24 @@ public static int chooseRoom(ArrayList<Room> rooms){
 }
 
 public static boolean checkDates(String date1, String date2){
-  int[] date1A = new int[3];
-  int[] date2A = new int[3];
+  int day = 0;
+  int month = 1;
+  int year = 2;
   String[] splitDate1 = date1.split("\\D+");
   String[] splitDate2 = date2.split("\\D+");
   if (splitDate1.length != 3) return true;
   if (splitDate2.length != 3) return true;
-  if (checkDateFormat(date1)) return true;
-  if (checkDateFormat(date2)) return true;
+  int[] date1A = new int[3];
+  int[] date2A = new int[3];
 
   for (int i = 0; i < 3; i++) {
-    if (!isInteger(splitDate1[i])) return false;
-    if (!isInteger(splitDate2[i])) return false;
+    if (!isInteger(splitDate1[i])) return true;
+    if (!isInteger(splitDate2[i])) return true;
     date1A[i] = Integer.parseInt(splitDate1[i]);
     date2A[i] = Integer.parseInt(splitDate2[i]);
   }
-  return date1A[1] >= date2A[1] && date1A[2] >= date2A[2];
+  if (date1A[month] == date2A[month]) return date1A[day] > date2A[day] || date1A[day] == date2A[day] || date1A[year] > date2A[year];
+  return date1A[month] > date2A[month] || date1A[year] > date2A[year];
 }
 
 public static boolean checkDateFormat(String date){
