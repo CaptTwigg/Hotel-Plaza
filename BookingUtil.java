@@ -10,6 +10,7 @@ public class BookingUtil {
    saveToFile
    extendStay
    createBooking
+   bill
    chooseRoom
    checkDates
    checkDateFormat
