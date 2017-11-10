@@ -1,3 +1,5 @@
+package staff;
+
 import java.util.*;
 import java.io.*;
 
@@ -5,7 +7,7 @@ public class StaffUtil {
 public static void staffMenu(ArrayList<Staff> staffs) throws Exception {
   boolean again = true;
   do {
-    int input = HotelExercise.intInput("\n1: Show staffs, 2: add staff , 3: edit staff, 4: remowe staff, -1: Back to main menu");
+    int input = intInput("\n1: Show staffs, 2: add staff , 3: edit staff, 4: remowe staff, -1: Back to main menu");
     switch (input) {
     case -1:
       again = false;
@@ -64,5 +66,17 @@ public static void showarraylist(ArrayList<Staff> staffs) throws Exception {
   for (int i = 0; i < staffs.size(); i++) {
     System.out.println(staffs.get(i).toString());
   }
+}
+public static int intInput(String message) {
+  int num = 0;
+  try {
+    System.out.print(message);
+    num = (new Scanner(System.in)).nextInt();
+  } catch (InputMismatchException e) {
+    System.out.println("Enter a number please");
+    num = intInput(message);
+  }
+
+  return num;
 }
 }

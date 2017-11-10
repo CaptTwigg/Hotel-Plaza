@@ -1,3 +1,5 @@
+package guest;
+
 import java.io.*;
 import java.util.*;
 

@@ -1,5 +1,8 @@
 import java.util.*;
 import java.io.*;
+import guest.*;
+import room.*;
+import staff.*;
 
 public class HotelExercise {
 public static void main(String[] args) throws Exception {
@@ -8,10 +11,10 @@ public static void main(String[] args) throws Exception {
   ArrayList<Staff> staffs = new ArrayList<>();
   ArrayList<Room> rooms = new ArrayList<>();
 
-  String guestFile = "guests.dat";
+  String guestFile = "guest/guests.dat";
   String bookingFile = "booking.dat";
-  String staffFile = "staffs.dat";
-  String roomFile = "rooms.dat";
+  String staffFile = "staff/staffs.dat";
+  String roomFile = "room/rooms.dat";
 
   GuestUtil.loadGuestFile(guestFile, guests);
   BookingUtil.loadFile(bookingFile, bookings);
